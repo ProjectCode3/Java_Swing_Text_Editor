@@ -4,10 +4,15 @@ import javax.swing.*;
 
 import Server.Server;
 
+import java.awt.*;
+
 public class Client {
     public static Server server;
 
     public static JFrame frame = new JFrame();
+    public static JTextArea text;
+    public static JLabel lblCaption;
+    public static JPanel panel;
 
     public static JMenuBar menubar;
 
@@ -26,6 +31,13 @@ public class Client {
 
     public static JMenuItem zoom_in;
     public static JMenuItem zoom_out;
+
+    public static JMenuItem theme;
+    public static JMenuItem font_theme;
+
+    public static JMenuItem about_notepad;
+    public static JMenuItem version;
+    public static JMenuItem author;
 
     public static void main(String[] args){
         //init the frame (constructor class
@@ -68,7 +80,29 @@ public class Client {
         zoom_out = new JMenuItem("Zoom Out");
         server.addItemToMenu(zoomOut, zoom_out);
 
+        theme = new JMenuItem("Window Theme");
+        server.addItemToMenu(window, theme);
+        font_theme = new JMenuItem("Font Theme");
+        server.addItemToMenu(window, font_theme);
 
+        about_notepad = new JMenuItem("About");
+        server.addItemToMenu(about, about_notepad);
+        version = new JMenuItem("Version");
+        server.addItemToMenu(about, version);
+        author = new JMenuItem("Author");
+        server.addItemToMenu(about, author);
+
+        lblCaption = new JLabel("No Caption");
+        panel = new JPanel();
+        panel.add(lblCaption);
+
+        text = new JTextArea(10, 40);
+
+
+
+
+        frame.getContentPane().add(panel, BorderLayout.SOUTH);
+        frame.getContentPane().add(text, BorderLayout.CENTER);
         frame.setJMenuBar(menubar);
         frame.setVisible(server.setFrameVisible());
     }
