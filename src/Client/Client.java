@@ -244,6 +244,82 @@ public class Client {
                 }
         );
 
+        zoom_in.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource() == zoom_in){
+                           Font font = text.getFont();
+                           float size = font.getSize() + 10.0f;
+                           text.setFont(font.deriveFont(size));
+
+                        }
+                    }
+                }
+        );
+
+
+        zoom_out.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource() == zoom_out){
+                           Font font = text.getFont();
+                           float size = font.getSize() - 10.0f;
+                           text.setFont(font.deriveFont(size));
+                        }
+                    }
+                }
+        );
+
+        about_notepad.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Display Message about The project
+                         * :param:: String
+                         * :return:: String
+                         */
+                        String author_Name = "the_coder12";
+                        String version_number = "Version 1.0 Beta";
+                        String language_version = "JER";
+                        JOptionPane.showMessageDialog(null, "Author: " + author_Name +
+                                                                                      "\nVersion: " + version_number+
+                                                                                       "\nLanguage: " + language_version);
+                    }
+                }
+        );
+
+        version.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Display the version of the project
+                         * :param:: String
+                         * :return:: String
+                         */
+                        JOptionPane.showMessageDialog(frame, "Beta Version 1.0");
+                    }
+                }
+        );
+
+        author.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Display The Author Name for the project
+                         * :param:: String
+                         * :return:: String
+                         */
+                        JOptionPane.showMessageDialog(frame, "Author Name: the_coder12");
+                    }
+                }
+        );
+
+
         frame.getContentPane().add(panel, BorderLayout.SOUTH);
         frame.getContentPane().add(text, BorderLayout.CENTER);
         frame.setJMenuBar(menubar);
