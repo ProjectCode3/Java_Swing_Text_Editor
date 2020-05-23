@@ -1,18 +1,26 @@
 package Client;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.awt.*;
 
 import Server.Server;
 
-import java.awt.*;
+
 
 public class Client {
     public static Server server;
+
+    public static int returnVal;
 
     public static JFrame frame = new JFrame();
     public static JTextArea text;
     public static JLabel lblCaption;
     public static JPanel panel;
+    public static JFileChooser fc;
+    public static JFileChooser sc;
 
     public static JMenuBar menubar;
 
@@ -99,7 +107,142 @@ public class Client {
         text = new JTextArea(10, 40);
 
 
+        //Open file function
+        open.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Open File dialog to find file
+                         * :param:: String file contents
+                         * :return:: File contents
+                         */
+                        fc = new JFileChooser();
+                        fc.showOpenDialog(null);
+                        File f = fc.getSelectedFile();
+                        String fileName = f.getAbsolutePath();
+                        try{
+                            FileReader fReader = new FileReader(fileName);
+                            BufferedReader bReader = new BufferedReader(fReader);
+                            text.read(bReader, null);
+                            bReader.close();
+                            text.requestFocus();
+                            lblCaption.setText("Current Path: " + fileName);
+                        }catch (Exception e1){
+                            JOptionPane.showMessageDialog(frame, "[Exception] " + e1);
+                        }
 
+                    }
+                }
+        );
+
+        //Clears the TextArea
+        newfile.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Get Info from user whether to clear the text area or not or cancelled the process
+                         * :param:: Integer
+                         * :param:: None
+                         */
+                        returnVal = Integer.valueOf(JOptionPane.showConfirmDialog(frame, "Are You Sure You Want To Clear The Text, All Unsaved Progress Will Be Lost"));
+
+                        switch (returnVal){
+                            case 0:
+                                text.setText(null);
+                                lblCaption.setText("No Current file Selected");
+                                break;
+                            case 1:
+                                JOptionPane.showMessageDialog(frame ,"Current File Still Active");
+                                break;
+                            case 2:
+                                JOptionPane.showMessageDialog(frame, "Clearing Cancelled");
+                                break;
+                        }
+                    }
+                }
+        );
+
+        //Saves File As Type
+        save_as.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Saves The File if It doesn't Exist
+                         * :param:: String : FileName
+                         * :return:: File Name
+                         */
+                        returnVal = sc.showSaveDialog(null);
+                        if (returnVal == JFileChooser.APPROVE_OPTION){
+                            File _file = sc.getSelectedFile();
+                            String fileName = _file.getAbsolutePath();
+                            try{
+                                FileWriter fwriter = new FileWriter(fileName);
+                                BufferedWriter bWriter = new BufferedWriter(fwriter);
+                                bWriter.append(text.getText());
+                                bWriter.close();
+                            } catch (IOException ie){
+                                JOptionPane.showMessageDialog(frame, "[Exception] " + e);
+                            }
+                        }
+                    }
+                }
+        );
+
+        //save if Contents of File has been Appended
+        save.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Save Appended Content from text to file
+                         * :param:: String File Contents
+                         * :return:: String File Contents
+                         */
+                        File _newFile = fc.getSelectedFile();
+                        String $fileName = _newFile.getAbsolutePath();
+                        try{
+                            File newfile = new File($fileName);
+                            String path = newfile.getAbsolutePath();
+                            String str = text.getText();
+                            BufferedWriter out = new BufferedWriter(new FileWriter(path));
+                            out.write(str);
+                            out.close();
+                        }catch (IOException u) {
+                            JOptionPane.showMessageDialog(null, "[Exception] " + u);
+                        }
+                    }
+                }
+        );
+
+        exit.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Get Input from user whether to exit application
+                         * :param:: Int
+                         * :return:: Int
+                          */
+                        returnVal = Integer.valueOf(JOptionPane.showConfirmDialog(null, "AAre You Sure You Want To Exit, All Unsaved Progress Will Be Lost"));
+
+                        switch(returnVal){
+                            case 0:
+                                System.exit(0);
+                                break;
+                            case 1:
+                                JOptionPane.showMessageDialog(frame, "Application Still Active");
+                                break;
+                            case 2:
+                                JOptionPane.showMessageDialog(frame, "Cancelled Quiting Process");
+                                break;
+                        }
+
+                    }
+                }
+        );
 
         frame.getContentPane().add(panel, BorderLayout.SOUTH);
         frame.getContentPane().add(text, BorderLayout.CENTER);
