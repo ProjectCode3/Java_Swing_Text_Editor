@@ -270,6 +270,23 @@ public class Client {
                 }
         );
 
+        dark.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Sets The Theme for the text editor
+                         * :param:: JTextArea and Color
+                         * :return:: color
+                         */
+                        Color color = new Color(70, 70, 70);
+                        server.setThemeColor(text, color);
+                        Color fc = new Color(255, 255, 255);
+                        server.setFontColor(text, fc);
+                    }
+                }
+        );
+
         zoom_in.addActionListener(
                 new ActionListener() {
                     @Override

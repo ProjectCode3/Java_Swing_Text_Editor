@@ -100,4 +100,14 @@ public class Server {
          */
         text.setBackground(color);
     }
+
+    public void setFontColor(JTextArea text, Color color){
+        /**
+         *Sets The Color theme for the text area font
+         * :param:: Color
+         * :return:: Color
+         */
+        text.setForeground(color);
+    }
+
 }
