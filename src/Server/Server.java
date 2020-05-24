@@ -83,5 +83,21 @@ public class Server {
         menu.add(item);
     }
 
+    public void addMenuToMenu(JMenu menu, JMenu item){
+        /**
+         * Adds A Menu To Another Menu As A Sub Menu
+         * :param:: JMenu
+         * :return:: None
+         */
+        menu.add(item);
+    }
 
+    public void setThemeColor(JTextArea text, Color color){
+        /**
+         *Sets The Color theme for the text area
+         * :param:: Color
+         * :return:: Color
+         */
+        text.setBackground(color);
+    }
 }

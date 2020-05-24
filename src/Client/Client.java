@@ -40,8 +40,15 @@ public class Client {
     public static JMenuItem zoom_in;
     public static JMenuItem zoom_out;
 
-    public static JMenuItem theme;
-    public static JMenuItem font_theme;
+    public static JMenu theme;
+    public static JMenuItem dark;
+    public static JMenuItem linux;
+    public static JMenuItem mac;
+    public static JMenuItem light;
+    public static JMenuItem windows;
+    public static JMenu font_theme;
+    public static JMenuItem color;
+    public static JMenuItem theme_for_font;
 
     public static JMenuItem about_notepad;
     public static JMenuItem version;
@@ -88,10 +95,29 @@ public class Client {
         zoom_out = new JMenuItem("Zoom Out");
         server.addItemToMenu(zoomOut, zoom_out);
 
-        theme = new JMenuItem("Window Theme");
+        theme = new JMenu("Window Theme");
         server.addItemToMenu(window, theme);
-        font_theme = new JMenuItem("Font Theme");
+        font_theme = new JMenu("Font Theme");
         server.addItemToMenu(window, font_theme);
+
+        color = new JMenuItem("Font Color");
+        server.addItemToMenu(font_theme, color);
+        theme_for_font = new JMenuItem("Font Theme");
+        server.addItemToMenu(font_theme, theme_for_font);
+
+
+        dark = new JMenuItem("Dark Theme");
+        server.addItemToMenu(theme, dark);
+        light = new JMenuItem("Light Theme");
+        server.addItemToMenu(theme, light);
+        linux = new JMenuItem("Dark Theme[Linux]");
+        server.addItemToMenu(theme, linux);
+        mac = new JMenuItem("Dark Theme[MacOS X]");
+        server.addItemToMenu(theme, mac);
+        windows = new JMenuItem("Dark Theme[Windows]");
+        server.addItemToMenu(theme, windows);
+
+
 
         about_notepad = new JMenuItem("About");
         server.addItemToMenu(about, about_notepad);
