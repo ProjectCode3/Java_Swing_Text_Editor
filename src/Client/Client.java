@@ -287,15 +287,86 @@ public class Client {
                 }
         );
 
+        linux.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Change the theme to linux dark theme
+                         * :return:: Color
+                         */
+                        Color color = new Color(114, 137, 218);
+                        server.setThemeColor(text, color);
+
+                        Color fc = new Color(0, 0, 255);
+                        server.setFontColor(text, fc);
+                    }
+                }
+        );
+
+        light.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * sets the theme color back to default
+                         * :return:: Color
+                         */
+                        Color color = new Color(255, 255, 255);
+                        server.setThemeColor(text, color);
+
+                        Color fc = new Color(0 , 0, 0 );
+                        server.setFontColor(text, fc);
+                    }
+                }
+        );
+
+        mac.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Set the mac theme for the editor
+                         * :return:: Color
+                         */
+                        Color color = new Color(128, 128, 128);
+                        server.setThemeColor(text, color);
+
+                        Color fc = new Color(0, 0, 0);
+                        server.setFontColor(text, fc);
+                    }
+                }
+        );
+
+        windows.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Sets the Windows theme for the editor
+                         *
+                         */
+                         Color color = new Color(70, 70, 70);
+                         server.setThemeColor(text, color);
+
+                         Color fc = new Color(0, 0, 0);
+                         server.setFontColor(text, color);
+                    }
+                }
+        );
+
         zoom_in.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Increase the text area font size
+                         * :return:: Float
+                         */
                         if (e.getSource() == zoom_in){
                            Font font = text.getFont();
                            float size = font.getSize() + 10.0f;
                            text.setFont(font.deriveFont(size));
-
                         }
                     }
                 }
@@ -306,6 +377,10 @@ public class Client {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        /**
+                         * Resize the font size of the text area
+                         *:return::Float
+                         */
                         if (e.getSource() == zoom_out){
                            Font font = text.getFont();
                            float size = font.getSize() - 10.0f;
